@@ -1,11 +1,15 @@
 // api.js — all communication with the FastAPI backend
 //
 // Every function here maps to one backend endpoint.
-// URLs are relative (/api/...) — Vite's dev proxy forwards them to http://localhost:8000.
-// In production these would point to your actual domain.
+// In development: VITE_API_URL is empty, so URLs are relative (/api/...)
+//   and Vite's proxy forwards them to http://localhost:8000.
+// In production: VITE_API_URL is your ngrok URL (e.g. https://abc123.ngrok-free.app)
+//   so requests go directly to your running backend.
+
+const BASE_URL = import.meta.env.VITE_API_URL || ''
 
 async function request(path, options = {}) {
-  const res = await fetch(path, options)
+  const res = await fetch(`${BASE_URL}${path}`, options)
   if (!res.ok) {
     const err = await res.json().catch(() => ({ detail: 'Something went wrong.' }))
     throw new Error(err.detail || 'Request failed')
