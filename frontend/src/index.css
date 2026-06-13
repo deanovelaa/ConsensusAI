@@ -1,0 +1,242 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Design Tokens ─────────────────────────────────────────────────────────── */
+:root {
+  --cream:       #F7F4EE;
+  --cream-dark:  #EDE8DF;
+  --focal:       #1A2744;
+  --focal-soft:  #243457;
+  --ink:         #151515;
+  --ink-soft:    #5C5449;
+  --ink-muted:   #9B9288;
+  --border:      #E2DDD5;
+  --radius-card: 20px;
+  --radius-btn:  999px;
+  --radius-tag:  999px;
+}
+
+/* ── Base ──────────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  background-color: var(--cream);
+  color: var(--ink);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100dvh;
+}
+
+/* ── Typography ────────────────────────────────────────────────────────────── */
+.font-display {
+  font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+}
+
+/* ── The focal card — the hero moment on every page ───────────────────────── */
+/* This is the dark navy card that contains the poll question.               */
+/* Like the dark green card in the reference — it commands attention.        */
+.focal-card {
+  background-color: var(--focal);
+  border-radius: var(--radius-card);
+  color: white;
+  padding: 2rem;
+  box-shadow: 0 8px 40px rgba(26, 39, 68, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle texture on focal card — large decorative quote mark */
+.focal-card::before {
+  content: '"';
+  position: absolute;
+  top: -20px;
+  right: 20px;
+  font-family: 'Bricolage Grotesque', serif;
+  font-size: 10rem;
+  font-weight: 800;
+  color: rgba(255,255,255,0.04);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ── Cards — light surfaces ─────────────────────────────────────────────────── */
+.card {
+  background: white;
+  border-radius: var(--radius-card);
+  border: 1.5px solid var(--border);
+  box-shadow: 0 4px 24px rgba(21, 21, 21, 0.06);
+}
+
+.card-cream {
+  background: var(--cream-dark);
+  border-radius: var(--radius-card);
+  border: 1.5px solid var(--border);
+}
+
+/* ── Inputs ─────────────────────────────────────────────────────────────────── */
+/* On cream background: bottom border, Typeform style */
+.input-field {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid var(--border);
+  border-radius: 0;
+  outline: none;
+  width: 100%;
+  color: var(--ink);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  transition: border-color 0.2s ease;
+  caret-color: var(--focal);
+}
+.input-field:focus { border-bottom-color: var(--focal); }
+.input-field::placeholder { color: var(--ink-muted); opacity: 0.6; }
+
+/* On focal card (dark): white underline */
+.input-field-dark {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid rgba(255,255,255,0.2);
+  border-radius: 0;
+  outline: none;
+  width: 100%;
+  color: white;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  transition: border-color 0.2s ease;
+  caret-color: #FBBF24;
+}
+.input-field-dark:focus { border-bottom-color: rgba(255,255,255,0.6); }
+.input-field-dark::placeholder { color: rgba(255,255,255,0.3); }
+
+/* ── Buttons ─────────────────────────────────────────────────────────────────── */
+.btn-primary {
+  background: var(--ink);
+  color: white;
+  border-radius: var(--radius-btn);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-primary:hover:not(:disabled) {
+  background: var(--focal);
+  box-shadow: 0 4px 20px rgba(26, 39, 68, 0.3);
+}
+.btn-primary:active:not(:disabled) { transform: scale(0.97); }
+.btn-primary:disabled { opacity: 0.35; cursor: not-allowed; }
+
+/* Ghost button on focal (dark) card */
+.btn-ghost-white {
+  background: rgba(255,255,255,0.12);
+  color: white;
+  border-radius: var(--radius-btn);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  cursor: pointer;
+  transition: background 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-ghost-white:hover { background: rgba(255,255,255,0.2); }
+
+/* Cream ghost button on light background */
+.btn-ghost {
+  background: white;
+  color: var(--ink-soft);
+  border-radius: var(--radius-btn);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  border: 1.5px solid var(--border);
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-ghost:hover { border-color: var(--ink); color: var(--ink); }
+
+/* ── Tags / Badges ──────────────────────────────────────────────────────────── */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: var(--radius-tag);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+.tag-yellow { background: #FEF3C7; color: #92400E; }
+.tag-green  { background: #D1FAE5; color: #065F46; }
+.tag-purple { background: #EDE9FE; color: #5B21B6; }
+.tag-muted  { background: var(--cream-dark); color: var(--ink-muted); }
+.tag-white  { background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.85); }
+
+/* ── Cluster bars — chunky pill style ───────────────────────────────────────── */
+.bar-track {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--cream-dark);
+  overflow: hidden;
+}
+.bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.bar-primary  { background: var(--focal); }
+.bar-accent   { background: #A78BFA; }
+.bar-muted    { background: var(--border); }
+
+/* ── Toggle — warm minimal ──────────────────────────────────────────────────── */
+.toggle-track {
+  position: relative; width: 44px; height: 24px;
+  border-radius: 999px;
+  transition: background 0.2s ease;
+  cursor: pointer; border: none;
+}
+.toggle-track[data-on="true"]  { background: var(--focal); }
+.toggle-track[data-on="false"] { background: var(--border); }
+
+.toggle-thumb {
+  position: absolute; top: 3px; left: 3px;
+  width: 18px; height: 18px;
+  border-radius: 50%; background: white;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease;
+}
+.toggle-track[data-on="true"] .toggle-thumb { transform: translateX(20px); }
+
+/* ── Monospace link display ──────────────────────────────────────────────────── */
+.link-mono {
+  font-family: 'DM Mono', 'Courier New', monospace;
+  font-size: 0.8125rem;
+  color: var(--ink-soft);
+}
+
+/* ── Focus rings ────────────────────────────────────────────────────────────── */
+button:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--focal);
+  outline-offset: 3px;
+}
+
+/* ── Reduced motion ─────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .bar-fill, .btn-primary, .toggle-thumb { transition: none; }
+}
+
+/* ── Scrollbar ──────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--ink-muted); }
